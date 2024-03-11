@@ -1,0 +1,26 @@
+project:
+  title: "Palmer Penguins"
+  type: datapage
+
+format:
+  datapage-html
+
+execute: 
+  echo: false
+  message: false
+  warning: false
+  error: false
+
+redivis:
+  user: datapages
+  dataset: palmerpenguins
+  table: penguins
+  id: 79km-7k95jq0w7
+  # user: mikabr
+  # project: irw
+  # table: metadata_output
+  # id: vvkq-6c8h1w2n2
+
+# plots:
+#   scatter:
+#     redivis-table: datapages/penguins

@@ -1,0 +1,22 @@
+```{r}
+# dataset <- redivis::organization("datapages")$dataset("palmerpenguins")
+# penguins <- dataset$table("penguins")$to_tibble()
+# ojs_define(data = penguins)
+```
+
+```{r}
+quarto <- yaml::read_yaml("_quarto.yml")
+if ("redivis" %in% names(quarto) &&
+    all(c("user", "table") %in% names(quarto$redivis)) &&
+    any(c("dataset", "project") %in% names(quarto$redivis))) {
+  if (!is.null(quarto$redivis$dataset)) {
+    dataset <- redivis::user(quarto$redivis$user)$dataset(quarto$redivis$dataset)
+  } else {
+    dataset <- redivis::user(quarto$redivis$user)$project(quarto$redivis$project)
+  }
+  data <- dataset$table(quarto$redivis$table)$to_tibble()
+  ojs_define(data = data)
+} else {
+  ojs_define(data = NULL)
+}
+```

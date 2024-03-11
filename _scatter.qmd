@@ -1,0 +1,38 @@
+```{ojs}
+//| include: true
+
+Plot = import("https://esm.sh/@observablehq/plot")
+d = transpose(data)
+
+function getTypeVars(obj, type) {
+  return Object.entries(obj)
+    .filter(([key, value]) => 
+      Array.isArray(value) && value.every(item => 
+        item === null || typeof item === type
+      )
+    )
+    .map(([key]) => key);
+}
+
+cont_vars = getTypeVars(data, 'number')
+viewof x_var = Inputs.select(cont_vars, {value: cont_vars[0], label: "X axis"})
+viewof y_var = Inputs.select(cont_vars, {value: cont_vars[1], label: "Y axis"})
+
+disc_vars = getTypeVars(data, 'string')
+u = disc_vars.unshift(null)
+viewof color_var = Inputs.select(disc_vars, {label: "Color"})
+default_color = d3.schemeCategory10[0]
+plt_color = color_var || default_color
+
+Plot.plot({
+  inset: 8,
+  grid: true,
+  color: {
+    legend: true,
+  },
+  marks: [
+    Plot.dot(d, {x: x_var, y: y_var, stroke: plt_color}),
+    Plot.tip(d, Plot.pointer({x: x_var, y: y_var, stroke: plt_color})),
+  ]
+})
+```

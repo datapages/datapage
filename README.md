@@ -1,11 +1,9 @@
-# <%= title %> Format
+# datapage
 
 ## Installing
 
-*TODO*: Replace the `<github-organization>` with your GitHub organization.
-
 ```bash
-quarto use template <github-organization>/<%= filesafename %>
+quarto use template datapages/datapage
 ```
 
 This will install the extension and create an example qmd file that you can use as a starting place for your article.

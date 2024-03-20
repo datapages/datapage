@@ -1,0 +1,51 @@
+```{ojs}
+//| panel: input
+
+viewof x_var = Inputs.select(cont_vars, {value: cont_vars[0], label: "X axis"})
+viewof y_var = Inputs.select(cont_vars, {value: cont_vars[1], label: "Y axis"})
+viewof color_var = Inputs.select(disc_vars, {value: disc_vars[1], label: "Color"})
+```
+
+```{ojs}
+default_color = d3.schemeCategory10[0]
+plt_color = color_var || default_color
+
+viewof scatter = Plot.plot({
+  style: { fontFamily: "var(--sans-serif)" },
+  inset: 8,
+  grid: true,
+  color: {
+    legend: true,
+  },
+  marks: [
+    Plot.dot(d, {x: x_var, y: y_var, stroke: plt_color}),
+    Plot.tip(d, Plot.pointer({x: x_var, y: y_var, stroke: plt_color})),
+  ]
+})
+
+viewof x_hist = Plot.plot({
+  style: { fontFamily: "var(--sans-serif)" },
+  width: 640/2,
+      y: {grid: true},
+  marks: [
+    Plot.rectY(d, Plot.binX({y: "count"}, {x: x_var, fill: plt_color})),
+    Plot.ruleY([0])
+  ]
+})
+
+viewof y_hist = Plot.plot({
+  style: { fontFamily: "var(--sans-serif)" },
+  width: 640/2,
+      y: {grid: true},
+  marks: [
+    Plot.rectY(d, Plot.binX({y: "count"}, {x: y_var, fill: plt_color})),
+    Plot.ruleY([0])
+  ]
+})
+
+html`<div style="display: flex; flex-wrap: wrap; align-items: flex-end;">
+ <div style="flex-basis: 25%"> ${viewof y_hist} </div>
+ <div style="flex-basis: 50%"> ${viewof scatter} </div>
+ <div style="flex-basis: 25%"> ${viewof x_hist} </div>
+</div>`
+```

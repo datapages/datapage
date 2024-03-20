@@ -20,3 +20,23 @@ if ("redivis" %in% names(quarto) &&
   ojs_define(data = NULL)
 }
 ```
+
+```{ojs}
+Plot = import("https://esm.sh/@observablehq/plot@0.6.13")
+d = transpose(data)
+
+function getTypeVars(obj, type) {
+  return Object.entries(obj)
+    .filter(([key, value]) => 
+      Array.isArray(value) && value.every(item => 
+        item === null || typeof item === type
+      )
+    )
+    .map(([key]) => key);
+}
+
+cont_vars = getTypeVars(data, 'number')
+
+disc_vars = getTypeVars(data, 'string')
+u = disc_vars.unshift(null)
+```

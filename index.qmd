@@ -5,8 +5,12 @@ description: |
   Data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station, Antarctica LTER](https://pallter.marine.rutgers.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/).
 ---
 
-![Artwork by \@allison_horst](images/lter_penguins.png){fig-align="center" width="60%"}
+![Artwork by \@allison_horst](images/lter_penguins.png){fig-align="center" width="50%"}
 
 {{< include _load-data.qmd >}}
 
-{{< include _scatter.qmd >}}
+{{< include _scatter_hist.qmd >}}
+
+<!-- {{< include _scatter.qmd >}} -->
+
+<!-- {{< include _hist.qmd >}} -->

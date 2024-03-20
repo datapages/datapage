@@ -1,15 +1,3 @@
----
-# embeds:
-  # - type: tables
-  #   id: 79km-7k95jq0w7
-  # - id: 79km-7k95jq0w7
-  # - id: wjz0-3avcrf1gh
----
+{{< redivis-table >}}
 
-{{< redivis-embeds >}}
-
-<!-- {{< redivis-embeds width="45%" height=800 >}} -->
-
-<!-- {{< redivis-table 79km-7k95jq0w7 >}} -->
-
-<!-- {{< redivis 79km-7k95jq0w7 width=400 height=800 >}} -->
+<!-- {{< redivis-table datapages.palmerpenguins.penguins >}} -->

@@ -12,7 +12,7 @@ local function checkArg(kwargs, key, default)
 end
 
 local function makeURL(id, etype)
-  return 'https://redivis.com/embed/' .. etype .. '/' .. id
+  return 'https://redivis.com/embed/' .. etype .. '/' .. id .. '#cells'
 end
 
 local function makeEmbed(id, etype, kwargs)
@@ -29,7 +29,22 @@ end
 return {
   -- embed a redivis table, id given as first argument
   ['redivis-table'] = function(args, kwargs, meta)
-    local embed_id = pandoc.utils.stringify(args[1])
+    if #args > 0 then
+      embed_id = pandoc.utils.stringify(args[1])
+      
+    -- if no table given, default to redivis key in metadata
+    else
+      redivis = meta['redivis']
+      user = pandoc.utils.stringify(redivis['user'])
+      if redivis['project'] then
+        dataset = pandoc.utils.stringify(redivis['project'])
+      end
+      if redivis['dataset'] then
+        dataset = pandoc.utils.stringify(redivis['dataset'])
+      end
+      table = pandoc.utils.stringify(redivis['table'])
+      embed_id = user .. '.' .. dataset .. '.' .. table
+    end
     return makeEmbed(embed_id, 'tables', kwargs)
   end,
   

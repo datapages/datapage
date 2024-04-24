@@ -6,18 +6,33 @@
 
 ```{r}
 quarto <- yaml::read_yaml("_quarto.yml")
+
+# load data from redivis table if specified in yaml
 if ("redivis" %in% names(quarto) &&
-    all(c("user", "table") %in% names(quarto$redivis)) &&
-    any(c("dataset", "project") %in% names(quarto$redivis))) {
+    all(c("user", "table") %in% names(quarto$redivis)) && # need user and table
+    any(c("dataset", "project") %in% names(quarto$redivis))) { # need dataset or project
   if (!is.null(quarto$redivis$dataset)) {
+    # use dataset if provided
     dataset <- redivis::user(quarto$redivis$user)$dataset(quarto$redivis$dataset)
   } else {
+    # otherwise use project
     dataset <- redivis::user(quarto$redivis$user)$project(quarto$redivis$project)
   }
-  data <- dataset$table(quarto$redivis$table)$to_tibble()
+  
+  # get table data
+  table <- dataset$table(quarto$redivis$table)
+  data <- table$to_tibble()
+
+  # get variable metadata
+  vars <- map(table$list_variables(), \(v) v$get(wait_for_statistics=TRUE)$properties)
+
+  # pass to OJS
   ojs_define(data = data)
+  ojs_define(vars = vars)
+  
 } else {
   ojs_define(data = NULL)
+  ojs_define(vars = NULL)
 }
 ```
 
@@ -25,18 +40,13 @@ if ("redivis" %in% names(quarto) &&
 Plot = import("https://esm.sh/@observablehq/plot@0.6.13")
 d = transpose(data)
 
-function getTypeVars(obj, type) {
-  return Object.entries(obj)
-    .filter(([key, value]) => 
-      Array.isArray(value) && value.every(item => 
-        item === null || typeof item === type
-      )
-    )
-    .map(([key]) => key);
-}
+distinct_cutoff = 10
 
-cont_vars = getTypeVars(data, 'number')
+disc_types = ['string', 'boolean']
+disc_vars = vars.filter(d => disc_types.includes(d.type) && d.statistics.numDistinct <= distinct_cutoff).map(d => [d.label ? d.label : d.name, d.name])
+disc_opts = new Map([['', null]].concat(disc_vars))
 
-disc_vars = getTypeVars(data, 'string')
-u = disc_vars.unshift(null)
+cont_types = ['integer', 'float', 'date', 'datetime', 'time']
+cont_vars = vars.filter(d => cont_types.includes(d.type) && d.statistics.numDistinct > distinct_cutoff).map(d => [d.label ? d.label : d.name, d.name])
+cont_opts = new Map(cont_vars)
 ```

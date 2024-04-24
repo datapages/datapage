@@ -10,7 +10,7 @@ $primary: #3b6f74;
 iframe { border: none; }
 
 #title-block-header a {
-  color: var(--bs-light);
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
   text-decoration: underline;
 }
 

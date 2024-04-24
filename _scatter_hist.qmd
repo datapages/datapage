@@ -1,32 +1,40 @@
 ```{ojs}
 //| panel: input
 
-viewof x_var = Inputs.select(cont_vars, {value: cont_vars[0], label: "X axis"})
-viewof y_var = Inputs.select(cont_vars, {value: cont_vars[1], label: "Y axis"})
-viewof color_var = Inputs.select(disc_vars, {value: disc_vars[1], label: "Color"})
+viewof x_var = Inputs.select(cont_opts, {value: Array.from(cont_opts.values())[0], label: "X axis"})
+viewof y_var = Inputs.select(cont_opts, {value: Array.from(cont_opts.values())[1], label: "Y axis"})
+viewof color_var = Inputs.select(disc_opts, {value: Array.from(disc_opts.values())[1], label: "Color"})
 ```
 
 ```{ojs}
 default_color = d3.schemeCategory10[0]
 plt_color = color_var || default_color
 
+all_vars = cont_vars.concat(disc_vars)
+channels = Object.fromEntries(all_vars.map(k => [k[1], k[1]]))
+
 viewof scatter = Plot.plot({
   style: { fontFamily: "var(--sans-serif)" },
   inset: 8,
-  grid: true,
-  color: {
-    legend: true,
-  },
+   grid: true,
+      x: { tickFormat: "" },
+  color: { legend: true },
   marks: [
-    Plot.dot(d, {x: x_var, y: y_var, stroke: plt_color}),
-    Plot.tip(d, Plot.pointer({x: x_var, y: y_var, stroke: plt_color})),
+    Plot.dot(d, {
+      x: x_var,
+      y: y_var,
+      stroke: plt_color,
+      tip: true,
+      channels: channels
+    }),
   ]
 })
 
 viewof x_hist = Plot.plot({
   style: { fontFamily: "var(--sans-serif)" },
   width: 640/2,
-      y: {grid: true},
+      x: { tickFormat: "" },
+      y: { grid: true },
   marks: [
     Plot.rectY(d, Plot.binX({y: "count"}, {x: x_var, fill: plt_color})),
     Plot.ruleY([0])
@@ -36,7 +44,7 @@ viewof x_hist = Plot.plot({
 viewof y_hist = Plot.plot({
   style: { fontFamily: "var(--sans-serif)" },
   width: 640/2,
-      y: {grid: true},
+      y: { grid: true },
   marks: [
     Plot.rectY(d, Plot.binX({y: "count"}, {x: y_var, fill: plt_color})),
     Plot.ruleY([0])

@@ -15,6 +15,3 @@ redivis:
   user: datapages
   dataset: palmerpenguins
   table: penguins
-  # user: mikabr
-  # project: irw
-  # table: metadata_output

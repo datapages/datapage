@@ -11,8 +11,6 @@ contributes:
         left:
           - href: data.qmd
             text: Data
-          - href: docs.qmd
-            text: Documentation
           - href: analysis.qmd
             text: Analysis
           - href: about.qmd
@@ -21,8 +19,8 @@ contributes:
     format: datapage-html
   formats:
     html:
-      title-block-banner: var(--bs-primary)
-      title-block-banner-color: var(--bs-light)
+      title-block-banner: var(--bs-light)
+      title-block-banner-color: var(--bs-body-color)
       theme: [cosmo, theme.scss]
       mainfont: Nunito Sans
       fontsize: 1rem

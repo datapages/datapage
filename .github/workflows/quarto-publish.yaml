@@ -1,0 +1,31 @@
+on:
+  push:
+    branches: main
+
+name: Render and Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev libudunits2-dev libgdal-dev
+
+      - name: Set up renv
+        uses: r-lib/actions/setup-renv@v2
+
+      - name: Render and publish to GitHub Pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}

@@ -2,8 +2,13 @@ project:
   title: "Palmer Penguins"
   type: datapage
 
+website:
+  navbar:
+    logo: images/logo.png
+
 format:
-  datapage-html
+  datapage-html:
+    theme: theme.scss
 
 execute: 
   echo: false

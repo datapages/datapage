@@ -15,13 +15,12 @@ contributes:
             text: Analysis
           - href: about.qmd
             text: About
-        logo: images/logo.png
     format: datapage-html
   formats:
     html:
       title-block-banner: var(--bs-light)
       title-block-banner-color: var(--bs-body-color)
-      theme: [cosmo, theme.scss]
+      theme: [cosmo, theme-datapage.scss]
       mainfont: Nunito Sans
       fontsize: 1rem
       grid:

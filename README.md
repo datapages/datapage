@@ -1,8 +1,10 @@
 # datapage
 
-A datapage is a website for your data, showing users interactive visualizations, documentation, and the data itself. And whatever other content you want!
+A datapage is a website for your data, showing users interactive visualizations, documentation, and the data itself. And whatever other content you want! [See the live example here](https://datapages.github.io/datapage/)
 
-This takes the form of a [quarto](https://quarto.org/) extension that provides a custom quarto project type and format.
+<img width="1711" alt="Screenshot 2024-05-10 at 16 32 28" src="https://github.com/datapages/datapage/assets/1414971/48279b22-571a-47d8-ab8d-2454e9a7e0b5">
+
+This repo contains a [quarto](https://quarto.org/) extension that provides a custom quarto project type, format, and some handy lua filters, as well as a GitHub action that automatically renders your datapage and publishes it on GitHub pages.
 
 ## Getting started
 

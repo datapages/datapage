@@ -25,7 +25,7 @@ if ("redivis" %in% names(quarto) &&
   data <- table$to_tibble()
 
   # get variable metadata
-  vars <- map(table$list_variables(), \(v) v$get_statistics()$properties)
+  vars <- map(table$list_variables(), \(v) c(v$get()$properties, v$get_statistics()))
 
   # pass to OJS
   ojs_define(data = data)
@@ -44,10 +44,10 @@ d = transpose(data)
 distinct_cutoff = 10
 
 disc_types = ['string', 'boolean']
-disc_vars = vars.filter(d => disc_types.includes(d.type) && d.statistics.numDistinct <= distinct_cutoff).map(d => [d.label ? d.label : d.name, d.name])
+disc_vars = vars.filter(d => disc_types.includes(d.type) && d.numDistinct <= distinct_cutoff && d.numDistinct > 1).map(d => [d.label ? d.label : d.name, d.name])
 disc_opts = new Map([['', null]].concat(disc_vars))
 
 cont_types = ['integer', 'float', 'date', 'datetime', 'time']
-cont_vars = vars.filter(d => cont_types.includes(d.type) && d.statistics.numDistinct > distinct_cutoff).map(d => [d.label ? d.label : d.name, d.name])
+cont_vars = vars.filter(d => cont_types.includes(d.type) && d.numDistinct > distinct_cutoff).map(d => [d.label ? d.label : d.name, d.name])
 cont_opts = new Map(cont_vars)
 ```

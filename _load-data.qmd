@@ -5,6 +5,7 @@
 ```
 
 ```{r}
+library(redivis)
 quarto <- yaml::read_yaml("_quarto.yml")
 
 # load data from redivis table if specified in yaml
@@ -13,10 +14,10 @@ if ("redivis" %in% names(quarto) &&
     any(c("dataset", "project") %in% names(quarto$redivis))) { # need dataset or project
   if (!is.null(quarto$redivis$dataset)) {
     # use dataset if provided
-    dataset <- redivis::user(quarto$redivis$user)$dataset(quarto$redivis$dataset)
+    dataset <- redivis$user(quarto$redivis$user)$dataset(quarto$redivis$dataset)
   } else {
     # otherwise use project
-    dataset <- redivis::user(quarto$redivis$user)$project(quarto$redivis$project)
+    dataset <- redivis$user(quarto$redivis$user)$project(quarto$redivis$project)
   }
   
   # get table data
@@ -24,7 +25,7 @@ if ("redivis" %in% names(quarto) &&
   data <- table$to_tibble()
 
   # get variable metadata
-  vars <- map(table$list_variables(), \(v) v$get(wait_for_statistics=TRUE)$properties)
+  vars <- map(table$list_variables(), \(v) v$get_statistics()$properties)
 
   # pass to OJS
   ojs_define(data = data)
@@ -37,7 +38,7 @@ if ("redivis" %in% names(quarto) &&
 ```
 
 ```{ojs}
-Plot = import("https://esm.sh/@observablehq/plot@0.6.13")
+Plot = import("https://esm.sh/@observablehq/plot@0.6.17")
 d = transpose(data)
 
 distinct_cutoff = 10

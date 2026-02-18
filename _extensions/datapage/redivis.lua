@@ -36,8 +36,8 @@ return {
     else
       redivis = meta['redivis']
       user = pandoc.utils.stringify(redivis['user'])
-      if redivis['project'] then
-        dataset = pandoc.utils.stringify(redivis['project'])
+      if redivis['workflow'] then
+        dataset = pandoc.utils.stringify(redivis['workflow'])
       end
       if redivis['dataset'] then
         dataset = pandoc.utils.stringify(redivis['dataset'])

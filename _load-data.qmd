@@ -11,13 +11,13 @@ quarto <- yaml::read_yaml("_quarto.yml")
 # load data from redivis table if specified in yaml
 if ("redivis" %in% names(quarto) &&
     all(c("user", "table") %in% names(quarto$redivis)) && # need user and table
-    any(c("dataset", "project") %in% names(quarto$redivis))) { # need dataset or project
+    any(c("dataset", "workflow") %in% names(quarto$redivis))) { # need dataset or workflow
   if (!is.null(quarto$redivis$dataset)) {
     # use dataset if provided
     dataset <- redivis$user(quarto$redivis$user)$dataset(quarto$redivis$dataset)
   } else {
-    # otherwise use project
-    dataset <- redivis$user(quarto$redivis$user)$project(quarto$redivis$project)
+    # otherwise use workflow
+    dataset <- redivis$user(quarto$redivis$user)$workflow(quarto$redivis$workflow)
   }
   
   # get table data
@@ -35,19 +35,4 @@ if ("redivis" %in% names(quarto) &&
   ojs_define(data = NULL)
   ojs_define(vars = NULL)
 }
-```
-
-```{ojs}
-Plot = import("https://esm.sh/@observablehq/plot@0.6.17")
-d = transpose(data)
-
-distinct_cutoff = 10
-
-disc_types = ['string', 'boolean']
-disc_vars = vars.filter(d => disc_types.includes(d.type) && d.numDistinct <= distinct_cutoff && d.numDistinct > 1).map(d => [d.label ? d.label : d.name, d.name])
-disc_opts = new Map([['', null]].concat(disc_vars))
-
-cont_types = ['integer', 'float', 'date', 'datetime', 'time']
-cont_vars = vars.filter(d => cont_types.includes(d.type) && d.numDistinct > distinct_cutoff).map(d => [d.label ? d.label : d.name, d.name])
-cont_opts = new Map(cont_vars)
 ```

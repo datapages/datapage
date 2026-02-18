@@ -1,6 +1,14 @@
 ## Programmatic access
 
-You can access the {{< meta redivis.dataset >}} data programmatically using the Redivis API for [R](https://apidocs.redivis.com/client-libraries/redivis-r) or [Python](https://apidocs.redivis.com/client-libraries/redivis-python).
+```{r}
+library(glue)
+
+quarto <- yaml::read_yaml("_quarto.yml")
+ds_opts <- c("dataset", "workflow")
+ds <- ds_opts |> purrr::keep(\(d) !is.null(quarto$redivis[[d]]))
+```
+
+You can access data from `{{< meta redivis.`r ds` >}}` programmatically using the Redivis API for [R](https://apidocs.redivis.com/client-libraries/redivis-r) or [Python](https://apidocs.redivis.com/client-libraries/redivis-python).
 
 ::: {.panel-tabset}
 
@@ -19,10 +27,10 @@ devtools::install_github("redivis/redivis-r")
 library(redivis)
 
 user <- redivis::user("{{< meta redivis.user >}}")
-dataset <- user$dataset("{{< meta redivis.dataset >}}")
+`r ds` <- user$`r ds`("{{< meta redivis.`r ds` >}}")
 table <- dataset$table("{{< meta redivis.table >}}")
 
-# Load table as tidyverse tibble
+# load table as tidyverse tibble
 df <- table$to_tibble()
 ```
 
@@ -42,7 +50,7 @@ pip install --upgrade redivis
 import redivis
 
 user = redivis.user("{{< meta redivis.user >}}")
-dataset = user.dataset("{{< meta redivis.dataset >}}")
+`r ds` = user.`r ds`("{{< meta redivis.`r ds` >}}")
 table = dataset.table("{{< meta redivis.table >}}")
 
 # Load table as a dataframe

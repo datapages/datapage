@@ -1,0 +1,30 @@
+```{ojs}
+//| output: false
+
+Plot = import("https://esm.sh/@observablehq/plot@0.6.17")
+d = transpose(data)
+
+yaml = require("js-yaml")
+config_file = FileAttachment("_config.yml").text()
+config = yaml.load(config_file)
+
+distinct_cutoff = 10
+
+disc_types = (['string', 'boolean'])
+disc_filter = (config?.categorical_vars)
+  ? d => config.categorical_vars.includes(d.name)
+  : d => disc_types.includes(d.type) && d.numDistinct <= distinct_cutoff && d.numDistinct > 1
+disc_vars = vars.filter(disc_filter)
+disc_opts = new Map([['', null], ...disc_vars.map(d => [d.label ? d.label : d.name, d.name])])
+
+cont_types = (['integer', 'float', 'date', 'datetime', 'time'])
+cont_filter = (config?.numerical_vars)
+  ? d => config.numerical_vars.includes(d.name)
+  : d => cont_types.includes(d.type) && d.numDistinct > distinct_cutoff
+cont_vars = vars.filter(cont_filter)
+cont_opts = new Map(cont_vars.map(d => [d.label ? d.label : d.name, d.name]))
+
+x_val = config?.defaults?.x || cont_vars[0].name
+y_val = config?.defaults?.y || cont_vars[1].name
+color_val = config?.defaults?.color || disc_vars[0].name
+```

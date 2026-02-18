@@ -13,6 +13,8 @@ description: |
 
 {{< include _load-data.qmd >}}
 
+{{< include _plot-prep.qmd >}}
+
 {{< include _scatter_hist.qmd >}}
 
 <!-- {{< include _scatter.qmd >}} -->

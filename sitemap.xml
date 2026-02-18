@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://datapages.github.io/datapage/about.html</loc>
-    <lastmod>2026-01-29T21:14:29.619Z</lastmod>
+    <lastmod>2026-02-18T23:11:18.233Z</lastmod>
   </url>
   <url>
     <loc>https://datapages.github.io/datapage/data.html</loc>
-    <lastmod>2026-01-29T21:14:29.619Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datapages.github.io/datapage/analysis.html</loc>
-    <lastmod>2026-01-29T21:14:29.619Z</lastmod>
+    <lastmod>2026-02-18T23:11:18.233Z</lastmod>
   </url>
   <url>
     <loc>https://datapages.github.io/datapage/index.html</loc>
-    <lastmod>2026-01-29T21:14:29.626Z</lastmod>
+    <lastmod>2026-02-18T23:11:18.239Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datapages.github.io/datapage/analysis.html</loc>
+    <lastmod>2026-02-18T23:11:18.233Z</lastmod>
   </url>
 </urlset>

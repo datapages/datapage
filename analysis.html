@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1fba8689a38df54c74db226df591a40f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4f34fc0715618c40e0972b301ba0c9b4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -177,7 +177,7 @@ background: var(--bs-light);
 
 <section id="programmatic-access" class="level2">
 <h2 class="anchored" data-anchor-id="programmatic-access">Programmatic access</h2>
-<p>You can access the palmerpenguins data programmatically using the Redivis API for <a href="https://apidocs.redivis.com/client-libraries/redivis-r">R</a> or <a href="https://apidocs.redivis.com/client-libraries/redivis-python">Python</a>.</p>
+<p>You can access data from <code>palmerpenguins</code> programmatically using the Redivis API for <a href="https://apidocs.redivis.com/client-libraries/redivis-r">R</a> or <a href="https://apidocs.redivis.com/client-libraries/redivis-python">Python</a>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -196,7 +196,7 @@ background: var(--bs-light);
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> user<span class="sc">$</span><span class="fu">dataset</span>(<span class="st">"palmerpenguins"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> dataset<span class="sc">$</span><span class="fu">table</span>(<span class="st">"penguins"</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load table as tidyverse tibble</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># load table as tidyverse tibble</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> table<span class="sc">$</span><span class="fu">to_tibble</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://apidocs.redivis.com/client-libraries/redivis-r">View documentation</a></p>
 </div>

@@ -1,0 +1,16 @@
+numerical_vars:
+  - bill_length_mm
+  - bill_depth_mm
+  - flipper_length_mm
+  - body_mass_g
+
+categorical_vars:
+  - species
+  - island
+  - sex
+  - year
+
+defaults:
+  x: bill_length_mm
+  y: bill_depth_mm
+  color: island

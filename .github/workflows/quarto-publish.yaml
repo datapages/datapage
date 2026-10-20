@@ -16,6 +16,9 @@ concurrency:
 
 jobs:
   build-deploy:
+    # in a repo made from this template, the first run is for the template's
+    # own files, so wait for the first customization before building
+    if: github.run_number > 1 || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

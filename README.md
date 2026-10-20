@@ -39,3 +39,13 @@ Then add the token as a repository secret: go into your repository's Settings > 
 ## Local developement
 
 Run `renv::restore()` to install R package dependencies. Then run `quarto preview` to see the site output (if your dataset isn't public, you'll be prompted to log in to Redivis). Once you push to GitHub, a GitHub action automatically renders the site and deploys it to GitHub pages.
+
+R packages are installed from a dated snapshot of CRAN (set in `renv.lock`), so the GitHub action can install prebuilt binaries of every package. To update packages, pick a new snapshot date and run:
+```r
+options(repos = c(
+  CRAN = "https://packagemanager.posit.co/cran/YYYY-MM-DD",
+  langcog = "https://langcog.r-universe.dev"
+))
+renv::update()
+renv::snapshot()
+```

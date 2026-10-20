@@ -9,8 +9,9 @@ website:
 format:
   datapage-html:
     theme: theme.scss
+    mainfont: Jost
 
-execute: 
+execute:
   echo: false
   message: false
   warning: false

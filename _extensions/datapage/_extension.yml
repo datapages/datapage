@@ -21,7 +21,6 @@ contributes:
       title-block-banner: var(--bs-light)
       title-block-banner-color: var(--bs-body-color)
       theme: [cosmo, theme-datapage.scss]
-      mainfont: Nunito Sans
       fontsize: 1rem
       grid:
         sidebar-width: 0px

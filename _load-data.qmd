@@ -5,6 +5,10 @@
 ```
 
 ```{r}
+# an empty token (e.g. from an unset GitHub secret) would be sent as is,
+# so unset it to access public data anonymously
+if (Sys.getenv("REDIVIS_API_TOKEN") == "") Sys.unsetenv("REDIVIS_API_TOKEN")
+
 library(redivis)
 quarto <- yaml::read_yaml("_quarto.yml")
 
@@ -24,8 +28,12 @@ if ("redivis" %in% names(quarto) &&
   table <- dataset$table(quarto$redivis$table)
   data <- table$to_tibble()
 
-  # get variable metadata
-  vars <- map(table$list_variables(), \(v) c(v$get()$properties, v$get_statistics()))
+  # get variable metadata, counting distinct values from the data since
+  # variable statistics can't be accessed anonymously
+  vars <- purrr::map(table$list_variables(), \(v) {
+    props <- v$get()$properties
+    c(props, numDistinct = length(unique(na.omit(data[[props$name]]))))
+  })
 
   # pass to OJS
   ojs_define(data = data)

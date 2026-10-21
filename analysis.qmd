@@ -8,20 +8,18 @@ ds_opts <- c("dataset", "workflow")
 ds <- ds_opts |> purrr::keep(\(d) !is.null(quarto$redivis[[d]]))
 ```
 
-You can access data from `{{< meta redivis.`r ds` >}}` programmatically using the Redivis API for [R](https://apidocs.redivis.com/client-libraries/redivis-r) or [Python](https://apidocs.redivis.com/client-libraries/redivis-python).
+You can access data from `{{< meta redivis.`r ds` >}}` programmatically using the Redivis API for [R](https://apidocs.redivis.com/client-libraries/redivis-r){target="_blank"}, [Python](https://apidocs.redivis.com/client-libraries/redivis-python){target="_blank"}, or [JavaScript](https://apidocs.redivis.com/client-libraries/redivis-js){target="_blank"}.
 
 ::: {.panel-tabset}
 
 ## R
 
-1. Install the redivis-r package:
+Install the __redivis-r__ library [from R-universe](https://redivis.r-universe.dev/){target="_blank"}:
 ```{.r}
-devtools::install_github("redivis/redivis-r")
+install.packages("redivis", repos = c("https://redivis.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
-2. [Generate and set an API token](https://apidocs.redivis.com/client-libraries/redivis-r/getting-started#authentication).
-
-3. Access the data:
+Access the data:
 
 ```{.r}
 library(redivis)
@@ -31,21 +29,19 @@ user <- redivis::user("{{< meta redivis.user >}}")
 table <- dataset$table("{{< meta redivis.table >}}")
 
 # load table as tidyverse tibble
-df <- table$to_tibble()
+{{< meta redivis.table >}} <- table$to_tibble()
 ```
 
-[View documentation](https://apidocs.redivis.com/client-libraries/redivis-r)
+[View documentation >](https://apidocs.redivis.com/client-libraries/redivis-r){target="_blank"}
 
 ## Python
 
-1. Install the redivis-python client library:
+Install the __redivis-python__ library [from PyPI](https://pypi.org/project/redivis){target="_blank"}:
 ```{.python}
 pip install --upgrade redivis
 ```
 
-2. [Generate and set an API token](https://apidocs.redivis.com/client-libraries/redivis-python/getting-started#authentication).
-
-3. Access the data:
+Access the data:
 ```{.python}
 import redivis
 
@@ -53,10 +49,31 @@ user = redivis.user("{{< meta redivis.user >}}")
 `r ds` = user.`r ds`("{{< meta redivis.`r ds` >}}")
 table = dataset.table("{{< meta redivis.table >}}")
 
-# Load table as a dataframe
-df = table.to_pandas_dataframe()
+# load table as a pandas dataframe
+{{< meta redivis.table >}} = table.to_pandas_dataframe()
 ```
 
-[View documentation](https://apidocs.redivis.com/client-libraries/redivis-python)
+[View documentation >](https://apidocs.redivis.com/client-libraries/redivis-python){target="_blank"}
+
+## JS
+
+Install the __redivis-js__ library [from NPM](https://www.npmjs.com/package/redivis){target="_blank"}:
+```{.js}
+npm install --save redivis
+```
+
+Access the data:
+
+```{.js}
+import * as redivis from redivis
+
+{{< meta redivis.table >}} = await redivis
+  .user('{{< meta redivis.user >}}')
+  .`r ds`('{{< meta redivis.`r ds` >}}')
+  .table('{{< meta redivis.table >}}')
+  .listRows()
+```
+
+[View documentation >](https://apidocs.redivis.com/client-libraries/redivis-js){target="_blank"}
 
 :::

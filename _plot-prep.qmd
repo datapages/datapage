@@ -11,6 +11,9 @@ config = yaml.load(config_file)
 
 distinct_cutoff = 10
 
+// variable's label if it has one, otherwise its name
+var_label = name => vars.find(v => v.name === name)?.label || name
+
 disc_types = (['string', 'boolean'])
 disc_filter = (config?.categorical_vars)
   ? d => config.categorical_vars.includes(d.name)

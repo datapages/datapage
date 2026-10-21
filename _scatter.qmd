@@ -17,8 +17,9 @@ viewof scatter = Plot.plot({
   style: { fontFamily: "var(--sans-serif)" },
   inset: 8,
    grid: true,
-      x: { tickFormat: "" },
-  color: { legend: true },
+      x: { tickFormat: "", label: var_label(x_var) },
+      y: { label: var_label(y_var) },
+  color: { legend: true, style: { fontFamily: "var(--sans-serif)" } },
   marks: [
     Plot.dot(d, {
       x: x_var,

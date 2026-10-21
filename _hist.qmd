@@ -16,7 +16,7 @@ channels = Object.fromEntries(all_vars.map(k => [k[1], k[1]]))
 viewof x_hist = Plot.plot({
   style: { fontFamily: "var(--sans-serif)" },
   width: 640/2,
-      x: { tickFormat: "" },
+      x: { tickFormat: "", label: var_label(x_var) },
       y: { grid: true },
   marks: [
     Plot.rectY(d, Plot.binX({y: "count"}, {x: x_var, fill: plt_color})),
@@ -27,6 +27,7 @@ viewof x_hist = Plot.plot({
 viewof y_hist = Plot.plot({
   style: { fontFamily: "var(--sans-serif)" },
   width: 640/2,
+      x: { label: var_label(y_var) },
       y: { grid: true },
   marks: [
     Plot.rectY(d, Plot.binX({y: "count"}, {x: y_var, fill: plt_color})),

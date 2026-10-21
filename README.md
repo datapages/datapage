@@ -33,6 +33,8 @@ Create a GitHub repo for your datapage from this template repo: click on the "Us
 
 You also need to let GitHub Actions publish your site. Go into your repository's Settings > Pages and under "Build and deployment", set the Source to "GitHub Actions".
 
+<img width="800" alt="pages settings" src="https://github.com/user-attachments/assets/c6efbd55-b71b-4cc8-b598-ba8b07140ce9" />
+
 ### Step 3: Customize
 
 Now you can customize your datapage! In the `_quarto.yml` file, set your project title and your Redivis table information:

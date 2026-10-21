@@ -48,6 +48,24 @@ redivis:
 
 In `index.qmd`, edit the title, subtitle, description, and images for your homepage. In `about.qmd`, edit the images, links, and citation. The other pages update automatically.
 
+The About page also lists metadata from your dataset on Redivis, set by the `redivis-metadata` key in `about.qmd` (see [Shortcodes](#shortcodes) below). To change this information, edit it on Redivis.
+
+## Shortcodes
+
+The datapage extension provides these shortcodes for use in any page:
+
+- `{{< redivis-table >}}` embeds the Redivis table set in `_quarto.yml`. You can instead give a table as `user.dataset.table`, e.g. `{{< redivis-table datapages.palmerpenguins.penguins >}}`. Optionally set `width` (default `100%`) and `height` (default `800`).
+
+- `{{< redivis-dataset field >}}` shows one field of the dataset's metadata, e.g. `{{< redivis-dataset doi >}}`. The field can be any field of the [dataset's metadata](https://docs.redivis.com/api/resource-definitions/dataset) (use dots for nested fields, e.g. `version.tag`), or `citation`, `bibtex`, or `license` from the dataset's DOI.
+
+- `{{< redivis-metadata >}}` shows a list of dataset metadata fields, set by the page's `redivis-metadata` key. Each entry has a [Bootstrap icon](https://icons.getbootstrap.com/), a `label`, and a `field` as in `redivis-dataset`. Fields that aren't filled in on Redivis are left out.
+  ```yaml
+  redivis-metadata:
+    - icon: archive
+      label: DOI
+      field: doi
+  ```
+
 ## Data size
 
 Note that the automatically created scatter plot can get slow if the data has a large number of rows. Up to about 100,000 rows it stays responsive on a laptop. To also work well on phones, aim for 30,000 rows or fewer.

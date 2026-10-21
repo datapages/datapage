@@ -28,6 +28,19 @@ if ("redivis" %in% names(quarto) &&
   table <- dataset$table(quarto$redivis$table)
   data <- table$to_tibble()
 
+  # ojs_define writes doubles at full precision (~17 characters each), which
+  # can triple the page size, so round floats to 6 significant digits (but
+  # never past the decimal point, so large values keep their integer part)
+  round_floats <- function(x, digits = 6) {
+    mag <- floor(log10(abs(x)))
+    mag[!is.finite(mag)] <- 0
+    round(x, pmax(digits - 1 - mag, 0))
+  }
+  # only plain doubles, not doubles with a class like Date or POSIXct
+  data <- dplyr::mutate(data, dplyr::across(
+    dplyr::where(\(x) identical(class(x), "numeric")), round_floats
+  ))
+
   # get variable metadata, counting distinct values from the data since
   # variable statistics can't be accessed anonymously
   vars <- purrr::map(table$list_variables(), \(v) {

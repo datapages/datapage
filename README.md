@@ -36,6 +36,12 @@ Then add the token as a repository secret: go into your repository's Settings > 
 <img width="800" alt="4_add_secret" src="https://github.com/datapages/datapage/assets/1414971/9dd2abc0-336d-41c2-8b49-5e14ff46db2b">
 <img width="800" alt="5_new_secret" src="https://github.com/datapages/datapage/assets/1414971/b36911f4-22c5-411f-8217-fac4e14ce8bd">
 
+### Data size
+
+The scatter plot draws one point per row and redraws whenever a reader changes a selection, so the number of rows is the main limit. Up to about 100,000 rows it stays responsive on a laptop. To also work well on phones, aim for 30,000 rows or fewer.
+
+The whole table is also embedded in the page, so wide tables are limited by total size. Keep it under about 1 million cells (rows × columns), which loads in about 2 seconds. Over about 5 million cells, aggregate or subset your table first.
+
 ## Local developement
 
 Run `renv::restore()` to install R package dependencies. Then run `quarto preview` to see the site output (if your dataset isn't public, you'll be prompted to log in to Redivis). Once you push to GitHub, a GitHub action automatically renders the site and deploys it to GitHub pages.

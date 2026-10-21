@@ -1,29 +1,35 @@
 # datapage
 
-A datapage is a website for your data, showing users interactive visualizations, documentation, and the data itself. And whatever other content you want! [See the live example here](https://datapages.github.io/datapage/){target="_blank"}
+A datapage is a website for your data, showing users interactive visualizations, documentation, and the data itself. And whatever other content you want! [See the live example here](https://datapages.github.io/datapage/)
 
-<img width="1711" alt="Screenshot 2024-05-10 at 16 32 28" src="https://github.com/datapages/datapage/assets/1414971/48279b22-571a-47d8-ab8d-2454e9a7e0b5">
+This repo contains a [Quarto](https://quarto.org/) extension that provides a custom Quarto project type and format, some handy Lua filters, and a GitHub action that automatically renders your datapage and publishes it on GitHub pages.
 
-This repo contains a [Quarto](https://quarto.org/){target="_blank"} extension that provides a custom quarto project type, format, and some handy lua filters, as well as a GitHub action that automatically renders your datapage and publishes it on GitHub pages.
+<img width="3024" height="2668" alt="datapages.github.io/datapage" src="https://github.com/user-attachments/assets/2dbd4760-5a95-49e9-9b6b-5802aeb48b09" />
 
 ## Getting started
 
 ### Step 1: Upload data
 
-To make a datapage for your dataset, you'll need to first [create an account](https://redivis.com/){target="_blank"} on Redivis, an online data platform for research.
-An individual account is [free](https://redivis.com/pricing){target="_blank"} and comes with 10 GB of storage.
+To make a datapage for your dataset, you'll need to first [create an account](https://redivis.com/) on Redivis, an online data platform for research.
+An individual account is [free](https://redivis.com/pricing) and comes with 10 GB of storage.
 
-Then [create a new dataset on Redivis](https://redivis.com/workspace/datasets){target="_blank"} and upload your tabular data to a new table ([see here for more detailed guide](https://docs.redivis.com/guides/create-and-manage-datasets/create-and-populate-a-dataset){target="_blank"}).
+Then upload your data to Redivis ([see here for more detailed guide](https://docs.redivis.com/guides/create-and-manage-datasets/create-and-populate-a-dataset)).
+
+First create a new dataset from [your workspace](https://redivis.com/workspace/datasets):
+
+<img width="800" alt="new dataset" src="https://github.com/user-attachments/assets/f7c48136-0948-4558-99c7-e224849c4917" />
+
 Datapages show the full contents of your table, so set your dataset's public access level to "Data" so that your datapage can read it without authentication.
 
-<img width="800" alt="0_redivis_dataset" src="https://github.com/datapages/datapage/assets/1414971/e5b98a9e-6ba3-4161-b67c-63ac3a15c89d">
+Then upload your tabular data to a new table:
+
+<img width="800" alt="new table" src="https://github.com/user-attachments/assets/89fa06fc-6704-48b1-88f9-84bd4feabad3" />
 
 ### Step 2: Create repo
 
-Then make a GitHub repo for your datapage from this template repo. You can click on the "Use this template" button up top to create your repository.
-<img width="800" alt="1_template_repo" src="https://github.com/datapages/datapage/assets/1414971/2860d5cb-5171-4225-8ebf-d14dccf5bb96">
+Create a GitHub repo for your datapage from this template repo: click on the "Use this template" button at the top of this page or just [go here](https://github.com/new?template_name=datapage&template_owner=datapages). Keep visibility set to public. This repo has a GPL copyleft license, which your repo will inherit.
 
-This repo has a GPL copyleft license, which your repo will inherit.
+<img width="800" alt="new repo" src="https://github.com/user-attachments/assets/71b9d158-4227-4d6f-94af-8000164c0502" />
 
 You also need to let GitHub Actions publish your site. Go into your repository's Settings > Pages and under "Build and deployment", set the Source to "GitHub Actions".
 
